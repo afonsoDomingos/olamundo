@@ -10,13 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(23, 29, 45, 0.65);
-            --border-glow: rgba(99, 102, 241, 0.3);
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            --text-main: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-glow: rgba(168, 85, 247, 0.4);
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --border-glow: rgba(99, 102, 241, 0.2);
+            --primary-gradient: linear-gradient(135deg, #4338ca 0%, #7c3aed 50%, #db2777 100%);
+            --text-main: #0f172a;
+            --text-secondary: #475569;
+            --accent-glow: rgba(99, 102, 241, 0.15);
         }
 
         * {
@@ -38,12 +38,12 @@
             padding: 1.5rem;
         }
 
-        /* Ambient Lighting / Aurora Effect */
+        /* Ambient Pastel Lighting / Subtle Glow Effect */
         .ambient-glow {
             position: absolute;
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.2) 40%, transparent 70%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%);
             filter: blur(80px);
             border-radius: 50%;
             pointer-events: none;
@@ -52,12 +52,12 @@
 
         .ambient-glow-2 {
             position: absolute;
-            bottom: -100px;
-            right: -100px;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
-            filter: blur(70px);
+            bottom: -80px;
+            right: -80px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(99, 102, 241, 0.07) 50%, transparent 70%);
+            filter: blur(80px);
             border-radius: 50%;
             pointer-events: none;
             animation: pulse-ambient 10s ease-in-out infinite alternate-reverse;
@@ -68,28 +68,28 @@
             100% { transform: scale(1.15) translate(20px, 20px); }
         }
 
-        /* Container Card */
+        /* Container Card - White Clean Glassmorphism */
         .container {
             position: relative;
             z-index: 10;
             max-width: 580px;
             width: 100%;
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
             border-radius: 28px;
             padding: 3.5rem 2.5rem;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                        0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.08),
+                        0 4px 16px -2px rgba(15, 23, 42, 0.04);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
         }
 
         .container:hover {
             transform: translateY(-4px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6),
-                        0 0 35px var(--accent-glow);
+            box-shadow: 0 25px 60px -12px rgba(99, 102, 241, 0.18),
+                        0 8px 24px -4px rgba(15, 23, 42, 0.06);
         }
 
         /* Badge */
@@ -99,11 +99,11 @@
             gap: 8px;
             padding: 6px 16px;
             border-radius: 9999px;
-            background: rgba(99, 102, 241, 0.12);
-            border: 1px solid rgba(99, 102, 241, 0.25);
-            color: #c7d2fe;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #4338ca;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 1.5rem;
             letter-spacing: 0.02em;
         }
@@ -112,8 +112,8 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: #22c55e;
-            box-shadow: 0 0 10px #22c55e;
+            background-color: #16a34a;
+            box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
             animation: pulse-dot 2s infinite;
         }
 
@@ -133,7 +133,7 @@
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+            filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.15));
         }
 
         /* Subtitle */
@@ -166,7 +166,7 @@
             border: none;
             border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 10px 20px -5px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
             text-decoration: none;
@@ -174,7 +174,7 @@
 
         .btn:hover {
             transform: scale(1.04);
-            box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.5);
+            box-shadow: 0 15px 30px -5px rgba(219, 39, 119, 0.45);
         }
 
         .btn:active {
@@ -200,7 +200,7 @@
 
         .counter-number {
             font-weight: 700;
-            color: #c084fc;
+            color: #7c3aed;
         }
 
         /* Language pills */
@@ -210,13 +210,13 @@
             gap: 8px;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid #e2e8f0;
             width: 100%;
         }
 
         .lang-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
             color: var(--text-secondary);
             padding: 6px 14px;
             border-radius: 8px;
@@ -227,9 +227,10 @@
         }
 
         .lang-btn:hover, .lang-btn.active {
-            background: rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-            border-color: rgba(168, 85, 247, 0.4);
+            background: #ffffff;
+            color: #4338ca;
+            border-color: #6366f1;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.12);
         }
 
         /* Confetti particle canvas */

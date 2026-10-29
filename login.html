@@ -489,6 +489,13 @@
         Início
     </a>
 
+    <a href="admin.html" class="back-link" style="left: auto; right: 1.5rem;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Painel Admin
+    </a>
+
     <main class="auth-card">
         <!-- Brand Header -->
         <header class="auth-header">
@@ -758,19 +765,45 @@
         function handleLogin(event) {
             event.preventDefault();
             const email = document.getElementById('login-email').value;
-            showToast(`Bem-vindo, ${email.split('@')[0]}! Sessão iniciada.`, 'success');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1800);
+            if (email.toLowerCase().includes('admin')) {
+                showToast(`Sessão de Administrador iniciada! A abrir painel...`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1400);
+            } else {
+                showToast(`Bem-vindo, ${email.split('@')[0]}! Sessão iniciada.`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1600);
+            }
         }
 
         function handleRegister(event) {
             event.preventDefault();
             const name = document.getElementById('reg-name').value;
-            showToast(`Conta criada com sucesso para ${name}! A redirecionar...`, 'success');
+            const email = document.getElementById('reg-email').value;
+
+            // Save to localStorage app_users so it displays dynamically in admin.html
+            try {
+                const stored = localStorage.getItem('app_users');
+                let usersList = stored ? JSON.parse(stored) : [];
+                usersList.unshift({
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    role: "Utilizador",
+                    status: "Ativo",
+                    date: new Date().toISOString().split('T')[0]
+                });
+                localStorage.setItem('app_users', JSON.stringify(usersList));
+            } catch (err) {
+                console.error(err);
+            }
+
+            showToast(`Conta criada para ${name}! Registado no sistema.`, 'success');
             setTimeout(() => {
                 switchTab('login');
-            }, 2000);
+            }, 1800);
         }
     </script>
 </body>

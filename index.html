@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olá, Mundo! | Modern Web Experience</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(23, 29, 45, 0.65);
+            --border-glow: rgba(99, 102, 241, 0.3);
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-glow: rgba(168, 85, 247, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 1.5rem;
+        }
+
+        /* Ambient Lighting / Aurora Effect */
+        .ambient-glow {
+            position: absolute;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.2) 40%, transparent 70%);
+            filter: blur(80px);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulse-ambient 8s ease-in-out infinite alternate;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
+            filter: blur(70px);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulse-ambient 10s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes pulse-ambient {
+            0% { transform: scale(1) translate(-20px, -20px); }
+            100% { transform: scale(1.15) translate(20px, 20px); }
+        }
+
+        /* Container Card */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 580px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6),
+                        0 0 35px var(--accent-glow);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #c7d2fe;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        /* Headline */
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Subtitle */
+        p.description {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 2.25rem;
+        }
+
+        /* Interactive Action Area */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -5px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover svg {
+            transform: rotate(20deg) scale(1.1);
+        }
+
+        /* Counter badge */
+        .counter-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .counter-number {
+            font-weight: 700;
+            color: #c084fc;
+        }
+
+        /* Language pills */
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            width: 100%;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.825rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        /* Confetti particle canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <main class="container">
+        <div class="badge">
+            <span class="badge-dot"></span>
+            Primeiro Passo em HTML5
+        </div>
+
+        <h1 id="headline">Olá, Mundo!</h1>
+
+        <p class="description" id="subtext">
+            O seu código inicial pronto com elegância visual, tipografia moderna e animações interativas.
+        </p>
+
+        <div class="actions">
+            <button class="btn" id="greet-btn">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Celebrar Código!
+            </button>
+            <span class="counter-text">Cliques comemorativos: <span class="counter-number" id="click-count">0</span></span>
+        </div>
+
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="changeLang('pt')">Português</button>
+            <button class="lang-btn" onclick="changeLang('en')">English</button>
+            <button class="lang-btn" onclick="changeLang('es')">Español</button>
+            <button class="lang-btn" onclick="changeLang('fr')">Français</button>
+        </div>
+    </main>
+
+    <script>
+        // Multi-language support
+        const translations = {
+            pt: {
+                badge: 'Primeiro Passo em HTML5',
+                title: 'Olá, Mundo!',
+                desc: 'O seu código inicial pronto com elegância visual, tipografia moderna e animações interativas.',
+                btn: 'Celebrar Código!',
+                countText: 'Cliques comemorativos: '
+            },
+            en: {
+                badge: 'First Step in HTML5',
+                title: 'Hello, World!',
+                desc: 'Your starter template crafted with modern aesthetics, sleek typography, and interactive charm.',
+                btn: 'Celebrate Code!',
+                countText: 'Celebration clicks: '
+            },
+            es: {
+                badge: 'Primer Paso en HTML5',
+                title: '¡Hola, Mundo!',
+                desc: 'Tu código inicial listo con elegancia visual, tipografía moderna y efectos interactivos.',
+                btn: '¡Celebrar Código!',
+                countText: 'Clics de celebración: '
+            },
+            fr: {
+                badge: 'Premier Pas en HTML5',
+                title: 'Bonjour le Monde !',
+                desc: 'Votre code initial prêt avec élégance visuelle, typographie moderne et animations dynamiques.',
+                btn: 'Célébrer le Code !',
+                countText: 'Clics de fête : '
+            }
+        };
+
+        let currentLang = 'pt';
+        let clicks = 0;
+
+        function changeLang(lang) {
+            currentLang = lang;
+            const data = translations[lang];
+            
+            document.querySelector('.badge').innerHTML = `<span class="badge-dot"></span> ${data.badge}`;
+            document.getElementById('headline').textContent = data.title;
+            document.getElementById('subtext').textContent = data.desc;
+            document.getElementById('greet-btn').childNodes[2].nodeValue = ' ' + data.btn;
+            document.querySelector('.counter-text').childNodes[0].nodeValue = data.countText;
+
+            // Update active pill
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('onclick').includes(lang));
+            });
+        }
+
+        // Particle confetti effect
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createConfetti() {
+            const colors = ['#6366f1', '#a855f7', '#ec4899', '#38bdf8', '#fbbf24', '#34d399'];
+            for (let i = 0; i < 40; i++) {
+                particles.push({
+                    x: window.innerWidth / 2 + (Math.random() - 0.5) * 80,
+                    y: window.innerHeight / 2 + (Math.random() - 0.5) * 80,
+                    radius: Math.random() * 5 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.5) * 12 - 4,
+                    alpha: 1,
+                    decay: Math.random() * 0.02 + 0.015
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.25; // gravity
+                p.alpha -= p.decay;
+
+                if (p.alpha <= 0) {
+                    particles.splice(index, 1);
+                } else {
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Button Click Event
+        const greetBtn = document.getElementById('greet-btn');
+        const countSpan = document.getElementById('click-count');
+
+        greetBtn.addEventListener('click', () => {
+            clicks++;
+            countSpan.textContent = clicks;
+            createConfetti();
+        });
+    </script>
+</body>
+</html>
